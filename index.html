@@ -23,7 +23,7 @@
 
                 <h1 id="titre_formulaire">Grille d'auto-évaluation</h1>
 
-                <form id="formulaire_examen">
+                <form id="formulaire_examen"  action="https://designweb-production.up.railway.app/submit" methode="post" onsubmit="return Validation()">
                     
                     <div class="ligne_formulaire ligne_deux_colonnes">
                         <div class="colonne_gauche">
@@ -69,7 +69,7 @@
                             <p>J'atteste avoir pris le temps de bien lire toutes les questions et y avoir répondu au meilleur de mes connaissances. </p>
                             <p>Je comprends que malgré toutes les offrandes que je pourrais faire aux dieux du Web, la note que je me suis attribué ne représentera pas nécessairement ma note finale.</p>
                             
-                            <input type='checkbox' id='declaration' name='declaration'>
+                            <input type='checkbox' id='declaration' name='declaration' required>
                             <label for='declaration'>J'ai bien lu la déclaration ci-dessus. </label>
                             <small id="message_declaration"></small>
                         </div>

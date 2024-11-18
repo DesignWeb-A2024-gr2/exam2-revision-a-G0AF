@@ -8,7 +8,10 @@ const sliderNote = document.getElementById('note_estime');          // Le slider
 const titreNote = document.getElementById('titre_note_estime');     // Le titre de la note estimé
 const daIconeErreur = document.getElementById('da_icone_erreur');   // L'icone d'erreur associée au input du numéro de da
 const daIconeSucces = document.getElementById('da_icone_succes');   // L'icone de succès associée au input du numéro de da
+const Confirme = document.getElementById('declaration');
 
+sliderNote.addEventListener("input",ModifierIconeNote);
+inputNoDA.addEventListener("input", ValiderDa)
 // Initialisation de l'affichage de la bonne icone associé au numéro de da
 daIconeErreur.classList.remove('hidden');
 daIconeSucces.classList.add('hidden');
@@ -21,10 +24,24 @@ function ModifierIconeNote(note) {
     // l'élément icone qui sera modifié
     const iconeNote = document.getElementById('icone_note');
     // On initialise les classes de l'élément à "vide"
-    iconeNote.setAttribute("class", "");
-
+    if (sliderNote.value < 20){
+        iconeNote.setAttribute("class", "far fa-sad-cry");
+    }
+    else if (sliderNote.value < 40){
+        iconeNote.setAttribute("class", "far fa-sad-tear");
+    }
+    else if (sliderNote.value < 60){
+        iconeNote.setAttribute("class", "far fa-frown");
+    }
+    else if (sliderNote.value < 80){
+        iconeNote.setAttribute("class", "far fa-smile");
+    }
+    else{
+        iconeNote.setAttribute("class", "far fa-grin-squint-tears");
+    }
     // Ajout des bonnes classes selon la valeur de la note
     // À COMPLÉTER
+    titreNote.innerText = "Ma note estimée = " + sliderNote.value + " %";
 }
 
 /**
@@ -47,4 +64,35 @@ function ObtenirNombreAleatoire(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min +1)) + min;
+}
+
+function ValiderDa() {
+    const NumeroDa = inputNoDA.value;
+    const JusteNombre = /^\d+$/.test(NumeroDa);
+
+    if (JusteNombre && NumeroDa.length == 7 && NumeroDa.startsWith("1")|| NumeroDa.startsWith("2")){
+        daIconeSucces.style.display = "block";
+        daIconeErreur.style.display = "none";
+
+        return true;
+    }
+    else{
+        daIconeErreur.style.display = "block";
+        daIconeSucces.style.display = "none";
+
+        return false;
+    }
+}
+
+function Validation() {
+    let good = false;
+    if (ValiderDa()) {
+        
+        good = true;
+    }
+    else{
+        good = false;
+    }
+
+    return good;
 }
